@@ -1,0 +1,70 @@
+class Book:
+    def __init__(self, title, author, isbn):
+        self.title = title
+        self.author = author
+        self.isbn = isbn
+
+    def display_info(self):
+        print(f"Title: {self.title}")
+        print(f"Author: {self.author}")
+        print(f"ISBN: {self.isbn}")
+
+    def update_author(self, new_author):
+        self.author = new_author
+
+# Demonstrate the Book class
+book1 = Book("The Great Gatsby", "F. Scott Fitzgerald", "9780743273565")
+book2 = Book("1984", "George Orwell", "9780451524935")
+
+# Display book details
+print("Book 1 Details:")
+book1.display_info()
+print()
+
+print("Book 2 Details:")
+book2.display_info()
+print()
+
+# Update author name
+print("Updating author for Book 1...")
+book1.update_author("Francis Scott Fitzgerald")
+print("Updated Book 1 Details:")
+book1.display_info()
+print()
+
+class Library:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, book_name, author, copies):
+        self.books.append({"book_name": book_name, "author": author, "copies": copies})
+
+    def lend_book(self, book_name):
+        for book in self.books:
+            if book["book_name"] == book_name and book["copies"] > 0:
+                book["copies"] -= 1
+                print(f"Lent out a copy of '{book_name}'.")
+                return
+        print(f"Sorry, '{book_name}' is not available.")
+
+    def display_available_books(self):
+        print("Available Books:")
+        for book in self.books:
+            print(f"Title: {book['book_name']}, Author: {book['author']}, Copies: {book['copies']}")
+
+# Demonstrate the Library class
+library = Library()
+library.add_book("The Great Gatsby", "F. Scott Fitzgerald", 3)
+library.add_book("1984", "George Orwell", 2)
+
+# Display available books
+library.display_available_books()
+print()
+
+# Lend a book
+print("Lending a book...")
+library.lend_book("1984")
+print()
+
+# Display available books again
+library.display_available_books()
