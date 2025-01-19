@@ -1,0 +1,29 @@
+class ElectricityBill:
+    def __init__(self, units_consumed):
+        self.units_consumed = units_consumed
+
+    def calculate_bill(self):
+        # Define the slab rates
+        slab1_rate = 3.50  # Rate for first 100 units
+        slab2_rate = 4.50  # Rate for next 100 units
+        slab3_rate = 6.00  # Rate for units above 200
+
+        # Calculate the bill based on slabs
+        if self.units_consumed <= 100:
+            bill = self.units_consumed * slab1_rate
+        elif self.units_consumed <= 200:
+            bill = (100 * slab1_rate) + ((self.units_consumed - 100) * slab2_rate)
+        else:
+            bill = (100 * slab1_rate) + (100 * slab2_rate) + ((self.units_consumed - 200) * slab3_rate)
+
+        return bill
+
+# Input from the user
+units = float(input("Enter the number of units consumed: "))
+
+# Create an object of the ElectricityBill class
+bill_calculator = ElectricityBill(units)
+
+# Calculate and display the bill
+bill_amount = bill_calculator.calculate_bill()
+print(f"The electricity bill for {units} units is: ₹{bill_amount:.2f}")
